@@ -12,7 +12,40 @@ const apiClient = axios.create({
   withCredentials: true,
 });
 
-// ===== SET TOKEN =====
+apiClient.interceptors.request.use((config) => {
+  const token = lsGetToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      try {
+        const refreshResponse = await axios.get("/api/auth/refresh", {
+          withCredentials: true,
+        });
+        const newAccessToken = refreshResponse?.data?.data?.accessToken;
+        if (!newAccessToken)
+          throw new Error("No accessToken in refresh response");
+        setAuthorizationToken(newAccessToken);
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        return apiClient(originalRequest);
+      } catch (refreshError) {
+        deleteAuthorizationToken();
+        store.dispatch(fetchLogoutUser());
+        return Promise.reject(refreshError);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 export const setAuthorizationToken = (token) => {
   lsSetToken(token);
   apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -23,52 +56,4 @@ export const deleteAuthorizationToken = () => {
   delete apiClient.defaults.headers.common.Authorization;
 };
 
-// ===== REQUEST INTERCEPTOR =====
-apiClient.interceptors.request.use((config) => {
-  const token = lsGetToken();
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
-// ===== RESPONSE INTERCEPTOR =====
-apiClient.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-
-      try {
-        const refreshResponse = await axios.get(
-          "https://backend-tasteorama.onrender.com/api/auth/refresh",
-          { withCredentials: true }
-        );
-
-        const newAccessToken =
-          refreshResponse?.data?.data?.accessToken ||
-          refreshResponse?.data?.accessToken;
-
-        if (!newAccessToken) {
-          throw new Error("No accessToken in refresh response");
-        }
-
-        setAuthorizationToken(newAccessToken);
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-
-        return apiClient(originalRequest);
-      } catch (refreshError) {
-        deleteAuthorizationToken();
-        store.dispatch(fetchLogoutUser());
-        return Promise.reject(refreshError);
-      }
-    }
-
-    return Promise.reject(error);
-  }
-);
-
-// Экспортируем apiClient как default
 export default apiClient;

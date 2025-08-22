@@ -1,34 +1,25 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import ProfilePage from "../../pages/ProfilePage";
-import AuthPage from "../../pages/AuthPage";
-import HomePage from "../../pages/AuthPage";
-import PrivateRoute from "../../routes/PrivateRoute";
-import RestrictedRoute from "../../routes/RestrictedRoute";
-import LoginForm from "../AuthPage/Forms/LoginForm";
-import RegistrationForm from "../AuthPage/Forms/RegistrationForm";
+import { Toaster } from "react-hot-toast";
+import WelcomePage from "../../pages/WelcomePage.jsx";
+import Loader from "../shared/Loader/Loader.jsx";
+import css from "./App.module.css";
 
-const App = () => {
+const HomePage = lazy(() => import("../../pages/HomePage.jsx"));
+const RegisterPage = lazy(() => import("../../pages/RegisterPage.jsx"));
+const LoginPage = lazy(() => import("../../pages/LoginPage.jsx"));
+
+export default function App() {
   return (
-    <Routes>
-      <Route path="/auth/:authType" element={<AuthPage />} />
-
-      <Route
-        path="/profile"
-        element={<PrivateRoute component={ProfilePage} />}
-      />
-
-      <Route
-        path="/auth/login"
-        element={<RestrictedRoute component={LoginForm} />}
-      />
-      <Route
-        path="/auth/register"
-        element={<RestrictedRoute component={RegistrationForm} />}
-      />
-
-      <Route path="/" element={<HomePage />} />
-    </Routes>
+    <div className={css.container}>
+      <Toaster position="top-center" />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/auth/login" element={<LoginPage />} />
+          <Route path="/auth/register" element={<RegisterPage />} />
+        </Routes>
+      </Suspense>
+    </div>
   );
-};
-
-export default App;
+}

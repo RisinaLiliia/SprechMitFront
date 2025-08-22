@@ -25,13 +25,16 @@ const LoginForm = () => {
         actions.setSubmitting(false);
       }
     },
-    [dispatch, navigate],
+    [dispatch, navigate]
   );
 
   return (
     <div className={css.wrapper}>
       <h2 className={css.title}>Login</h2>
-
+      <p className={css.description}>
+        Log in to access your personalized German language learning journey,
+        track your progress, and start improving your skills today!
+      </p>
       <Formik
         initialValues={loginInitialValues}
         validationSchema={loginSchema}

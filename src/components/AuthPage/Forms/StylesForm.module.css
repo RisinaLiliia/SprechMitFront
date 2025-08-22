@@ -1,27 +1,23 @@
 .wrapper {
-  background-color: var(--light-beige);
-  padding: 48px 32px;
+  background-color: var(--off-white);
+  padding: 20px;
   border-radius: 32px;
   width: 100%;
-  max-width: 362px;
+  max-width: 360px;
   margin: 0 auto;
 }
 
 .title {
-  font-weight: 600;
-  font-size: 32px;
   text-align: center;
- color: var(--dark-gray);
-  margin-bottom: 20px;
+  color: var(--dark-gray);
+  margin-bottom: 30px;
 }
 
 .description {
-  font-weight: 400;
-  font-size: 16px;
   line-height: 1.55;
   text-align: center;
   color: var(--dark-gray);
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .form {
@@ -30,23 +26,21 @@
   gap: 16px;
 }
 
-
 .label {
   display: block;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-small);
   font-weight: bold;
   color: var(--dark-gray);
-  margin-bottom: 8px;
 }
 
 .inputWrapper {
   position: relative;
-  margin-bottom: 16px; 
+  margin-bottom: 16px;
 }
 
 .input {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   margin-top: 8px;
   font-size: var(--font-size-base);
   border: 1px solid var(--light-gray);
@@ -55,13 +49,11 @@
   color: var(--dark-gray);
   transition: border-color 0.3s ease;
 
- 
   &:focus {
     border-color: var(--green);
     outline: none;
   }
 
- 
   &.inputError {
     border-color: var(--red);
   }
@@ -90,7 +82,7 @@
 
 button {
   background-color: var(--yellow);
-  color: white;
+  color: var(--off-white);
   border: none;
   padding: 12px 20px;
   font-size: var(--font-size-base);
@@ -102,3 +94,61 @@ button {
     background-color: #d79e2d;
   }
 }
+
+/* Медиазапрос для маленьких экранов */
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 24px 16px; /* Уменьшаем отступы */
+  }
+
+  .title {
+    font-size: 24px; /* Меньший размер шрифта */
+    margin-bottom: 16px; /* Меньше расстояние до текста */
+  }
+
+  .description {
+    font-size: 14px; /* Меньший размер шрифта */
+    margin-bottom: 16px; /* Меньше расстояние до текста */
+  }
+
+  .input {
+    font-size: 14px; /* Меньше размер шрифта */
+    padding: 10px; /* Меньше внутренние отступы */
+  }
+
+  .button {
+    padding: 10px 16px; /* Меньше отступы в кнопке */
+  }
+}
+
+/* Медиазапрос для экранов меньше 320px */
+@media (max-width: 320px) {
+  .wrapper {
+    padding: 16px 10px; /* Уменьшаем отступы для еще меньших экранов */
+    max-width: 100%; /* Убираем ограничение по максимальной ширине */
+  }
+
+  .title {
+    font-size: 20px; /* Уменьшаем размер шрифта */
+    margin-bottom: 12px; /* Меньше расстояние до текста */
+  }
+
+  .description {
+    font-size: 12px; /* Еще меньше шрифт */
+    margin-bottom: 12px; /* Меньше расстояние до текста */
+  }
+
+  .form {
+    gap: 12px; /* Меньше расстояние между полями формы */
+  }
+
+  .input {
+    font-size: 12px; /* Меньше размер шрифта */
+    padding: 8px; /* Меньше внутренние отступы */
+  }
+
+  .button {
+    padding: 8px 14px; /* Уменьшаем отступы в кнопке */
+  }
+}
+

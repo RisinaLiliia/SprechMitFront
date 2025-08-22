@@ -1,20 +1,28 @@
 const TOKEN_KEY = "token";
 
+const isLocalStorageAvailable = () => {
+  try {
+    const test = "__test__";
+    localStorage.setItem(test, test);
+    localStorage.removeItem(test);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 export const lsSetToken = (token) => {
-  if (typeof localStorage !== "undefined") {
+  if (isLocalStorageAvailable()) {
     localStorage.setItem(TOKEN_KEY, token);
   }
 };
 
 export const lsGetToken = () => {
-  if (typeof localStorage !== "undefined") {
-    return localStorage.getItem(TOKEN_KEY);
-  }
-  return null;
+  return isLocalStorageAvailable() ? localStorage.getItem(TOKEN_KEY) : null;
 };
 
 export const lsRemoveToken = () => {
-  if (typeof localStorage !== "undefined") {
+  if (isLocalStorageAvailable()) {
     localStorage.removeItem(TOKEN_KEY);
   }
 };

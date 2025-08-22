@@ -16,6 +16,11 @@ const authSlice = createSlice({
     isLoading: false,
     error: null,
   },
+  reducers: {
+    resetError: (state) => {
+      state.error = null;
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(fetchRegisterUser.pending, handlePending)
@@ -43,5 +48,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchLogoutUser.rejected, handleError),
 });
+
+export const { resetError } = authSlice.actions;
 
 export default authSlice.reducer;

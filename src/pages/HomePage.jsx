@@ -1,10 +1,9 @@
-import React from "react";
+import Layout from "../Layout/Layout";
 
 const HomePage = () => {
   return (
     <div>
-      <h1>Ласкаво просимо до SprechMit</h1>
-      <p>Вивчайте німецьку мову з нами!</p>
+      <h2>Welcome to the home page!</h2>
     </div>
   );
 };
