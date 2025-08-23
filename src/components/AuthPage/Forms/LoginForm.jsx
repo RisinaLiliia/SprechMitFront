@@ -25,7 +25,7 @@ const LoginForm = () => {
         actions.setSubmitting(false);
       }
     },
-    [dispatch, navigate]
+    [dispatch, navigate],
   );
 
   return (

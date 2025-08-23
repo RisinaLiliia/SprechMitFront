@@ -1,5 +1,6 @@
 import css from "./WelcomeScreen.module.css";
 import AuthNav from "../AuthNav/AuthNav.jsx";
+import Logo from "../Logo/Logo.jsx";
 
 const WelcomeScreen = () => {
   return (

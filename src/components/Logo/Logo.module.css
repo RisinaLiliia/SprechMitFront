@@ -9,9 +9,17 @@
   align-items: center;
 }
 
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px; 
+}
+
 .logoText {
   font-family: var(--font-heading);
   font-size: var(--font-size-heading);
   color: var(--yellow);
   text-transform: uppercase;
 }
+
