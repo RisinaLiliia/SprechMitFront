@@ -1,18 +1,22 @@
 import * as React from "react";
+import { Slot } from "@radix-ui/react-slot"; // для asChild
 import { cn } from "@/lib/utils";
 
 function Button({
+  asChild = false,
   className,
   variant = "default",
   size = "default",
   ...props
 }) {
+  const Comp = asChild ? Slot : "button";
+
   const baseClasses =
     "inline-flex items-center justify-center rounded-md font-medium transition-all disabled:pointer-events-none disabled:opacity-50";
 
   const variantClasses = {
     default: "bg-primary text-primary-foreground hover:bg-primary/90",
-    destructive: "bg-red-500 text-white hover:bg-red-600", // отдельный "alert" цвет
+    destructive: "bg-red-500 text-white hover:bg-red-600",
     outline: "border border-border bg-transparent hover:bg-muted",
     secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
     ghost: "bg-transparent hover:bg-accent hover:text-accent-foreground",
@@ -26,12 +30,12 @@ function Button({
   };
 
   return (
-    <button
+    <Comp
       className={cn(
         baseClasses,
         variantClasses[variant],
         sizeClasses[size],
-        className,
+        className
       )}
       {...props}
     />

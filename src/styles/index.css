@@ -23,14 +23,32 @@
   --font-size-small: 14px;
 }
 
+
 .dark {
-  --dark-gray: #f2f2f2;
-  --off-white: #2e2e2e;
+  --dark-gray: #2e2e2e;
   --green: #3c6e47;
   --yellow: #eeba2b;
   --red: #d14b46;
   --light-gray: #b6ccd7;
+  --off-white: #f2f2f2;
 }
+
+html {
+  font-family: var(--font-main);
+  font-size: var(--font-size-base);
+  background-color: var(--off-white);
+  color: var(--dark-gray);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
 
 /* === Базовая типографика === */
 body {
