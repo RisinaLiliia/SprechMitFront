@@ -1,22 +1,25 @@
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { fetchLoginUser } from "../redux/auth/operations";
 
-export function useAuthForm(submitAction) {
+export const useAuthForm = (authThunk) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = useCallback(
-    async (values, actions) => {
-      try {
-        await dispatch(submitAction(values)).unwrap();
-        navigate("/");
-      } finally {
-        actions.setSubmitting(false);
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      const resultAction = await dispatch(authThunk(values));
+      if (fetchLoginUser.fulfilled.match(resultAction)) {
+        // успешный логин — редирект на /dashboard
+        navigate("/dashboard");
       }
-    },
-    [dispatch, navigate, submitAction],
-  );
+      resetForm();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return { handleSubmit };
-}
+};

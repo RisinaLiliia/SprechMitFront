@@ -14,17 +14,27 @@ export default function WelcomeScreen() {
         <Button
           asChild
           variant="outline"
-          className="flex-1 border-green text-green focus:outline-none focus:ring-2 focus:ring-green-700"
+          className="flex-1 border-green text-green"
         >
-          <Link to="/auth/login">Login</Link>
+          <Link
+            to="/auth/login"
+            className="flex-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-700 hover:bg-green-700 hover:text-white transition-colors duration-200"
+          >
+            Login
+          </Link>
         </Button>
 
         <Button
           asChild
           variant="default"
-          className="flex-1 bg-green text-offWhite focus:outline-none focus:ring-2 focus:ring-green-700"
+          className="flex-1 bg-green text-offWhite"
         >
-          <Link to="/auth/register">Register</Link>
+          <Link
+            to="/auth/register"
+            className="flex-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-700 hover:bg-green-700 transition-colors duration-200"
+          >
+            Register
+          </Link>
         </Button>
       </div>
     </div>

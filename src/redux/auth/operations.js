@@ -17,7 +17,7 @@ export const fetchRegisterUser = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  },
+  }
 );
 
 // Логин
@@ -33,7 +33,7 @@ export const fetchLoginUser = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  },
+  }
 );
 
 // Логаут
@@ -46,7 +46,7 @@ export const fetchLogoutUser = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  },
+  }
 );
 
 // Проверка текущего пользователя (авто-login)
@@ -54,10 +54,10 @@ export const fetchCurrentUser = createAsyncThunk(
   "auth/fetchCurrentUser",
   async (_, thunkAPI) => {
     try {
-      const { data } = await apiClient.get("/users"); // эндпоинт для текущего пользователя
-      return data.data; // объект пользователя
+      const { data } = await apiClient.get("/users");
+      return data.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  },
+  }
 );

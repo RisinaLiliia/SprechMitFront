@@ -23,7 +23,6 @@
   --font-size-small: 14px;
 }
 
-
 .dark {
   --dark-gray: #2e2e2e;
   --green: #3c6e47;
@@ -48,7 +47,6 @@ h5,
 h6 {
   font-family: var(--font-heading);
 }
-
 
 /* === Базовая типографика === */
 body {

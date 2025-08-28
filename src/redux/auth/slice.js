@@ -15,6 +15,7 @@ const authSlice = createSlice({
     user: null,
     isLoading: false,
     error: null,
+    isLoggedIn: false, // ← добавили
   },
   reducers: {
     resetError: (state) => {
@@ -25,26 +26,29 @@ const authSlice = createSlice({
     builder
       .addCase(fetchRegisterUser.pending, handlePending)
       .addCase(fetchRegisterUser.fulfilled, (state, { payload }) => {
-        state.error = null;
         state.user = payload;
+        state.isLoggedIn = true; // ← после успешной регистрации
         state.isLoading = false;
+        state.error = null;
       })
       .addCase(fetchRegisterUser.rejected, handleError)
 
       .addCase(fetchLoginUser.pending, handlePending)
       .addCase(fetchLoginUser.fulfilled, (state, { payload }) => {
-        state.error = null;
         state.user = payload;
+        state.isLoggedIn = true; // ← после успешного логина
         state.isLoading = false;
+        state.error = null;
       })
       .addCase(fetchLoginUser.rejected, handleError)
 
       .addCase(fetchLogoutUser.pending, handlePending)
       .addCase(fetchLogoutUser.fulfilled, (state) => {
         deleteAuthorizationToken();
-        state.error = null;
         state.user = null;
+        state.isLoggedIn = false; // ← после логаута
         state.isLoading = false;
+        state.error = null;
       })
       .addCase(fetchLogoutUser.rejected, handleError),
 });

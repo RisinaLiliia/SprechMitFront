@@ -7,8 +7,13 @@ export const loginInitialValues = {
 };
 
 export const loginFields = [
-  { name: "email", label: "Email", type: "email" },
-  { name: "password", label: "Password", type: "password" },
+  { name: "email", label: "Email", type: "email", autoComplete: "username" },
+  {
+    name: "password",
+    label: "Password",
+    type: "password",
+    autoComplete: "current-password",
+  },
 ];
 
 export const loginSchema = Yup.object().shape({
@@ -17,6 +22,7 @@ export const loginSchema = Yup.object().shape({
     .required("Email is required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
+    .max(128, "Password must be at most 128 characters")
     .required("Password is required"),
 });
 
@@ -30,10 +36,20 @@ export const registerInitialValues = {
 };
 
 export const registerFields = [
-  { name: "name", label: "Name", type: "text" },
-  { name: "email", label: "Email", type: "email" },
-  { name: "password", label: "Password", type: "password" },
-  { name: "confirmPassword", label: "Confirm Password", type: "password" },
+  { name: "name", label: "Name", type: "text", autoComplete: "name" },
+  { name: "email", label: "Email", type: "email", autoComplete: "username" },
+  {
+    name: "password",
+    label: "Password",
+    type: "password",
+    autoComplete: "new-password",
+  },
+  {
+    name: "confirmPassword",
+    label: "Confirm Password",
+    type: "password",
+    autoComplete: "new-password",
+  },
   {
     name: "privacyPolicyAccepted",
     label: "I accept the Privacy Policy",
@@ -51,14 +67,16 @@ export const registerSchema = Yup.object().shape({
     .required("Email is required"),
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
+    .max(128, "Password must be at most 128 characters")
     .matches(/[A-Za-z]/, "Password must contain at least one letter")
     .matches(/\d/, "Password must contain at least one number")
     .required("Password is required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords must match")
+    .max(128, "Password must be at most 128 characters")
     .required("Confirm your password"),
   privacyPolicyAccepted: Yup.boolean().oneOf(
     [true],
-    "You must accept the Privacy Policy",
+    "You must accept the Privacy Policy"
   ),
 });

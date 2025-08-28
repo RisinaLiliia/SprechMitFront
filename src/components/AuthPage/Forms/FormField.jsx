@@ -2,11 +2,16 @@ import { Field, ErrorMessage } from "formik";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 
-export default function FormField({ name, label, type = "text", placeholder }) {
+export default function FormField({
+  name,
+  label,
+  type = "text",
+  placeholder,
+  autoComplete, // <--- добавлено
+}) {
   const [showPassword, setShowPassword] = useState(false);
   const isPassword = type === "password";
 
-  // Чекбокс отдельно
   if (type === "checkbox") {
     return (
       <div className="flex flex-col">
@@ -43,6 +48,7 @@ export default function FormField({ name, label, type = "text", placeholder }) {
         name={name}
         type={isPassword && !showPassword ? "password" : type}
         placeholder={placeholder}
+        autoComplete={autoComplete} // <--- добавлено
         className="w-full pr-10 py-2 px-3 rounded-lg border border-lightGray bg-offWhite text-darkGray focus:outline-none focus:ring-2 focus:ring-green transition-colors"
       />
 

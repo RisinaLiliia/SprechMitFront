@@ -1,7 +1,8 @@
+// src/pages/HomePage.jsx
 import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/auth/selectors";
+import { selectUser } from "../redux/auth/selectors.js";
 
-const HomePage = () => {
+export default function HomePage() {
   const user = useSelector(selectUser);
 
   return (
@@ -20,6 +21,4 @@ const HomePage = () => {
       )}
     </div>
   );
-};
-
-export default HomePage;
+}
