@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import WelcomePage from "../../pages/WelcomePage.jsx";
 import Loader from "../shared/Loader/Loader.jsx";
-import css from "./App.module.css";
 
 const HomePage = lazy(() => import("../../pages/HomePage.jsx"));
 const RegisterPage = lazy(() => import("../../pages/RegisterPage.jsx"));
@@ -11,7 +10,7 @@ const LoginPage = lazy(() => import("../../pages/LoginPage.jsx"));
 
 export default function App() {
   return (
-    <div className={css.container}>
+    <div>
       <Toaster position="top-center" />
       <Suspense fallback={<Loader />}>
         <Routes>
