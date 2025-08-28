@@ -1,11 +1,14 @@
-import AppBar from "../AppBar/AppBar";
-import css from "./Layout.module.css";
+// src/components/shared/Layout.jsx
+import { Outlet } from "react-router-dom";
+import Header from "./Header";
 
-export default function Layout({ children }) {
+export default function Layout() {
   return (
-    <div className={css.container}>
-      <AppBar />
-      <main className={css.mainContent}>{children}</main>
+    <div className="min-h-screen flex flex-col bg-background dark:bg-darkGray transition-colors">
+      <Header />
+      <main className="flex-grow p-6">
+        <Outlet />
+      </main>
     </div>
   );
 }

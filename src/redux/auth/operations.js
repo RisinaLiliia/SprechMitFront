@@ -4,6 +4,7 @@ import apiClient, {
   setAuthorizationToken,
 } from "../../api/api.js";
 
+// Регистрация
 export const fetchRegisterUser = createAsyncThunk(
   "auth/fetchRegisterUser",
   async (newUser, thunkAPI) => {
@@ -16,28 +17,26 @@ export const fetchRegisterUser = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  },
+  }
 );
 
+// Логин
 export const fetchLoginUser = createAsyncThunk(
   "auth/fetchLoginUser",
   async (credentials, thunkAPI) => {
     try {
-      const dataLogin = await apiClient.post("/auth/login", credentials);
-      const { accessToken } = dataLogin.data.data;
+      const { data } = await apiClient.post("/auth/login", credentials);
+      const { accessToken, user } = data.data;
 
       setAuthorizationToken(accessToken);
-
-      const dataUser = await apiClient.get("/users");
-      const user = dataUser.data.data;
-
       return user;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  },
+  }
 );
 
+// Логаут
 export const fetchLogoutUser = createAsyncThunk(
   "auth/fetchLogoutUser",
   async (_, thunkAPI) => {
@@ -47,5 +46,18 @@ export const fetchLogoutUser = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  },
+  }
+);
+
+// Проверка текущего пользователя (авто-login)
+export const fetchCurrentUser = createAsyncThunk(
+  "auth/fetchCurrentUser",
+  async (_, thunkAPI) => {
+    try {
+      const { data } = await apiClient.get("/users");
+      return data.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response?.data || err.message);
+    }
+  }
 );

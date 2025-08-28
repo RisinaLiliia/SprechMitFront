@@ -28,7 +28,7 @@ export default defineConfig([
       ...reactHooks.configs["recommended-latest"].rules,
       ...reactRefresh.configs.vite.rules,
       "react/prop-types": 0,
-      "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
+      "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]|^(motion)$" }],
     },
   },
 ]);

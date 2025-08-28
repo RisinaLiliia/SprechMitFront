@@ -1,73 +1,23 @@
-import { useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Formik, Form } from "formik";
+import AuthForm from "./AuthForm";
+import { useAuthForm } from "../../../hooks/useAuthForm";
+import { fetchLoginUser } from "../../../redux/auth/operations";
+import { loginSchema, loginInitialValues, loginFields } from "./formConfig";
 
-import SubmitButton from "./SubmitButton.jsx";
-import BaseInput from "./BaseInput.jsx";
-import RedirectLink from "./RedirectLink.jsx";
-import { fetchLoginUser } from "../../../redux/auth/operations.js";
-import { loginSchema, loginInitialValues } from "./formConfig.js";
-
-import css from "./StylesForm.module.css";
-
-const LoginForm = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleSubmit = useCallback(
-    async (values, actions) => {
-      try {
-        await dispatch(fetchLoginUser(values)).unwrap();
-        navigate("/");
-      } finally {
-        actions.setSubmitting(false);
-      }
-    },
-    [dispatch, navigate],
-  );
+export default function LoginForm() {
+  const { handleSubmit } = useAuthForm(fetchLoginUser);
 
   return (
-    <div className={css.wrapper}>
-      <h2 className={css.title}>Login</h2>
-      <p className={css.description}>
-        Log in to access your personalized German language learning journey,
-        track your progress, and start improving your skills today!
-      </p>
-      <Formik
-        initialValues={loginInitialValues}
-        validationSchema={loginSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form className={css.form} noValidate>
-            <BaseInput
-              label="Enter your email address"
-              name="email"
-              type="email"
-              placeholder="email@gmail.com"
-            />
-            <BaseInput
-              label="Enter your password"
-              name="password"
-              type="password"
-              placeholder="********"
-              showToggle
-              show={showPassword}
-              onToggle={() => setShowPassword((prev) => !prev)}
-            />
-            <SubmitButton isSubmitting={isSubmitting} text="Login" />
-            <RedirectLink
-              text="Don't have an account?"
-              linkText="Register"
-              to="/auth/register"
-            />
-          </Form>
-        )}
-      </Formik>
-    </div>
+    <AuthForm
+      title="Log in"
+      description="Access your personalized German learning journey 🚀"
+      initialValues={loginInitialValues}
+      validationSchema={loginSchema}
+      fields={loginFields}
+      onSubmit={handleSubmit}
+      submitText="Log in"
+      alternativeText="Don’t have an account?"
+      alternativeLink="/auth/register"
+      alternativeLinkText="Sign up"
+    />
   );
-};
-
-export default LoginForm;
+}
