@@ -12,16 +12,16 @@ export default function RegistrationForm() {
 
   return (
     <AuthForm
-      title="Sign up"
-      description="Create your account and start learning German today ✨"
+      title="Registrieren"
+      description="Erstelle dein Konto und beginne noch heute, Deutsch zu lernen ✨"
       initialValues={registerInitialValues}
       validationSchema={registerSchema}
       fields={registerFields}
       onSubmit={handleSubmit}
-      submitText="Sign up"
-      alternativeText="Already have an account?"
+      submitText="Registrieren"
+      alternativeText="Schon ein Konto?"
       alternativeLink="/auth/login"
-      alternativeLinkText="Log in"
+      alternativeLinkText="Anmelden"
     />
   );
 }

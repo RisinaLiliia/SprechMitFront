@@ -6,7 +6,7 @@ function Card({ className, ...props }) {
     <div
       className={cn(
         "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border border-border shadow-sm transition-colors",
-        className,
+        className
       )}
       {...props}
     />
@@ -27,9 +27,7 @@ function CardTitle({ className, ...props }) {
 }
 
 function CardDescription({ className, ...props }) {
-  return (
-    <p className={cn("text-sm text-muted-foreground", className)} {...props} />
-  );
+  return <p className={cn("text-sm text-darkGray", className)} {...props} />;
 }
 
 function CardContent({ className, ...props }) {
@@ -41,7 +39,7 @@ function CardFooter({ className, ...props }) {
     <div
       className={cn(
         "flex items-center px-6 pt-6 border-t border-border",
-        className,
+        className
       )}
       {...props}
     />
