@@ -1,6 +1,5 @@
 import * as Yup from "yup";
 
-/* === LOGIN CONFIG === */
 export const loginInitialValues = {
   email: "",
   password: "",
@@ -26,7 +25,6 @@ export const loginSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-/* === REGISTER CONFIG === */
 export const registerInitialValues = {
   name: "",
   email: "",

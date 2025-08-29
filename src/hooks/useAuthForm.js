@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchLoginUser } from "../redux/auth/operations";
 
 export const useAuthForm = (authThunk) => {
   const dispatch = useDispatch();
@@ -8,12 +7,16 @@ export const useAuthForm = (authThunk) => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const resultAction = await dispatch(authThunk(values));
-      if (fetchLoginUser.fulfilled.match(resultAction)) {
-        // успешный логин — редирект на /dashboard
+      const { confirmPassword: _, ...dataToSend } = values;
+
+      const resultAction = await dispatch(authThunk(dataToSend));
+
+      if (authThunk.fulfilled.match(resultAction)) {
         navigate("/dashboard");
+        resetForm();
+      } else if (authThunk.rejected.match(resultAction)) {
+        console.error(resultAction.payload || resultAction.error);
       }
-      resetForm();
     } catch (error) {
       console.error(error);
     } finally {
