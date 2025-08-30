@@ -1,4 +1,3 @@
-// src/components/shared/Header.jsx
 import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,23 +13,24 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-between items-center px-6 py-4 shadow-md bg-background dark:bg-darkGray transition-colors">
+    <header className="flex justify-between items-center px-6 py-4 bg-offWhite dark:bg-darkGray transition-colors font-main">
       <Link
         to={user ? "/dashboard" : "/"}
-        className="text-2xl font-bold text-green dark:text-yellow"
+        className="text-2xl font-extrabold uppercase tracking-tight text-green dark:text-yellow"
       >
         SprechMit
       </Link>
+
       <div className="flex items-center gap-4">
         {user && (
-          <span className="font-medium text-foreground dark:text-offWhite">
+          <span className="font-bold text-darkGray dark:text-offWhite">
             Hi, {user.name}
           </span>
         )}
         {user && (
           <button
             onClick={handleLogout}
-            className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-all duration-200"
+            className="px-4 py-2 bg-red text-offWhite rounded-none font-bold uppercase tracking-wide hover:bg-yellow hover:text-darkGray transition-colors duration-200"
           >
             Logout
           </button>

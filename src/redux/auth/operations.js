@@ -4,7 +4,6 @@ import apiClient, {
   setAuthorizationToken,
 } from "../../api/api.js";
 
-// Регистрация
 export const fetchRegisterUser = createAsyncThunk(
   "auth/fetchRegisterUser",
   async (newUser, thunkAPI) => {
@@ -20,7 +19,6 @@ export const fetchRegisterUser = createAsyncThunk(
   }
 );
 
-// Логин
 export const fetchLoginUser = createAsyncThunk(
   "auth/fetchLoginUser",
   async (credentials, thunkAPI) => {
@@ -36,7 +34,6 @@ export const fetchLoginUser = createAsyncThunk(
   }
 );
 
-// Логаут
 export const fetchLogoutUser = createAsyncThunk(
   "auth/fetchLogoutUser",
   async (_, thunkAPI) => {
@@ -49,7 +46,6 @@ export const fetchLogoutUser = createAsyncThunk(
   }
 );
 
-// Проверка текущего пользователя (авто-login)
 export const fetchCurrentUser = createAsyncThunk(
   "auth/fetchCurrentUser",
   async (_, thunkAPI) => {

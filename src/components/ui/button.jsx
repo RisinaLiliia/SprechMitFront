@@ -12,15 +12,19 @@ function Button({
   const Comp = asChild ? Slot : "button";
 
   const baseClasses =
-    "inline-flex items-center justify-center rounded-md font-medium transition-all disabled:pointer-events-none disabled:opacity-50";
+    "inline-flex items-center justify-center rounded-md font-medium transition-all duration-150 ease-in-out disabled:pointer-events-none disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-700";
 
   const variantClasses = {
-    default: "bg-primary text-primary-foreground hover:bg-primary/90",
-    destructive: "bg-red-500 text-white hover:bg-red-600",
-    outline: "border border-border bg-transparent hover:bg-muted",
-    secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
-    ghost: "bg-transparent hover:bg-accent hover:text-accent-foreground",
-    link: "text-primary underline-offset-4 hover:underline",
+    default:
+      "bg-green text-offWhite hover:brightness-90 active:brightness-75 active:scale-95",
+    outline:
+      "border border-green text-green bg-transparent hover:bg-green hover:text-offWhite hover:brightness-95 active:brightness-75 active:scale-95",
+    destructive:
+      "bg-red text-offWhite hover:brightness-95 active:brightness-75 active:scale-95",
+    secondary:
+      "bg-yellow text-darkGray hover:brightness-95 active:brightness-75",
+    ghost: "bg-transparent hover:bg-lightGray hover:text-darkGray",
+    link: "text-green underline-offset-4 hover:underline",
   };
 
   const sizeClasses = {

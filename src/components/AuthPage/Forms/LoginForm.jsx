@@ -8,16 +8,16 @@ export default function LoginForm() {
 
   return (
     <AuthForm
-      title="Log in"
-      description="Access your personalized German learning journey 🚀"
+      title="Anmelden"
+      description="Greife auf deine personalisierte Deutschlern-Reise zu 🚀"
       initialValues={loginInitialValues}
       validationSchema={loginSchema}
       fields={loginFields}
       onSubmit={handleSubmit}
-      submitText="Log in"
-      alternativeText="Don’t have an account?"
+      submitText="Anmelden"
+      alternativeText="Noch kein Konto?"
       alternativeLink="/auth/register"
-      alternativeLinkText="Sign up"
+      alternativeLinkText="Registrieren"
     />
   );
 }
