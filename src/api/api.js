@@ -8,7 +8,7 @@ import { store } from "../redux/store";
 import { fetchLogoutUser } from "../redux/auth/operations";
 
 const apiClient = axios.create({
-  baseURL: "https://sprechmitbackend.onrender.com",
+  baseURL: "https://sprechmitbackend.onrender.com/api",
   withCredentials: true,
 });
 
