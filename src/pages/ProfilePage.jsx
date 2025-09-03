@@ -14,7 +14,6 @@ import AccountSettings from "../components/ProfilePage/AccountSettings.jsx";
 export default function ProfilePage() {
   const dispatch = useDispatch();
   const { user, status, error } = useSelector((state) => state.user);
-
   const [activeTab, setActiveTab] = useState("profile");
 
   useEffect(() => {
@@ -22,9 +21,17 @@ export default function ProfilePage() {
   }, [dispatch, user]);
 
   if (status === "loading")
-    return <p className="text-center mt-10">⏳ Profil wird geladen...</p>;
+    return (
+      <p className="text-center mt-10 text-offWhite dark:text-yellow">
+        ⏳ Profil wird geladen...
+      </p>
+    );
   if (error)
-    return <p className="text-center mt-10 text-red-500">Fehler: {error}</p>;
+    return (
+      <p className="text-center mt-10 text-red dark:text-yellow">
+        Fehler: {error}
+      </p>
+    );
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -57,8 +64,10 @@ export default function ProfilePage() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto p-4 md:p-6 bg-white rounded-2xl shadow">
-      <h1 className="text-2xl font-bold mb-6">👤 Mein Profil</h1>
+    <div className="max-w-4xl mx-auto p-4 md:p-6 bg-offWhite dark:bg-darkGray rounded-2xl shadow transition-colors">
+      <h1 className="text-2xl font-extrabold mb-6 text-darkGray dark:text-yellow">
+        👤 Mein Profil
+      </h1>
 
       <div className="block md:hidden space-y-2 mb-6">
         {menuItems.map(({ id, label, icon }) => {
@@ -69,8 +78,8 @@ export default function ProfilePage() {
               onClick={() => setActiveTab(id)}
               className={`flex items-center w-full px-4 py-3 rounded-xl border text-left transition ${
                 activeTab === id
-                  ? "bg-green-100 border-green-500 text-green-700"
-                  : "bg-gray-50 hover:bg-gray-100 text-gray-600"
+                  ? "bg-green-100 border-green-500 text-green-700 dark:bg-green/20 dark:text-yellow"
+                  : "bg-offWhite dark:bg-darkGray hover:bg-gray-100 dark:hover:bg-darkGray/80 text-darkGray dark:text-yellow"
               }`}
             >
               <IconComponent className="mr-3 h-5 w-5" />
@@ -84,10 +93,10 @@ export default function ProfilePage() {
         {menuItems.map(({ id, label }) => (
           <button
             key={id}
-            className={`px-4 py-2 font-semibold ${
+            className={`px-4 py-2 font-semibold border-b-2 transition ${
               activeTab === id
-                ? "border-b-2 border-green-500 text-green-600"
-                : "text-gray-500"
+                ? "border-green-500 text-green-600 dark:text-yellow"
+                : "border-transparent text-gray-500 dark:text-yellow/80"
             }`}
             onClick={() => setActiveTab(id)}
           >

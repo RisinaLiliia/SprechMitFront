@@ -20,29 +20,37 @@ export default function FriendsList() {
   };
 
   return (
-    <div className="mt-6">
-      <h2 className="text-xl font-semibold mb-4">👥 Freunde</h2>
+    <div className="mt-6 max-w-md mx-auto">
+      <h2 className="text-2xl font-extrabold mb-4 text-darkGray dark:text-yellow">
+        👥 Freunde
+      </h2>
 
       <div className="flex gap-2 mb-4">
         <Input
-          placeholder="Name hinzufügen"
+          placeholder="Name hinzufügen..."
           value={newFriend}
           onChange={(e) => setNewFriend(e.target.value)}
         />
-        <Button onClick={handleAddFriend}>Hinzufügen</Button>
+        <Button
+          onClick={handleAddFriend}
+          className="bg-green dark:bg-yellow text-offWhite dark:text-darkGray hover:bg-darkGray hover:text-yellow transition-colors"
+        >
+          Hinzufügen
+        </Button>
       </div>
 
       <ul className="space-y-2">
         {friends.map((f) => (
           <li
             key={f.id}
-            className="flex justify-between items-center p-2 border rounded"
+            className="flex justify-between items-center p-2 border-2 border-darkGray dark:border-yellow rounded-xl bg-offWhite dark:bg-darkGray transition-colors"
           >
-            <span>{f.name}</span>
+            <span className="text-darkGray dark:text-yellow">{f.name}</span>
             <Button
               variant="destructive"
               size="sm"
               onClick={() => handleRemoveFriend(f.id)}
+              className="bg-red dark:bg-yellow text-offWhite dark:text-darkGray hover:bg-darkGray hover:text-yellow transition-colors"
             >
               Entfernen
             </Button>

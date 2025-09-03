@@ -7,27 +7,24 @@ export default function ProfileEditor() {
   const user = useSelector((state) => state.user.user);
   const status = useSelector((state) => state.user.status);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "" });
 
   useEffect(() => {
     if (user) {
-      setFormData({
-        name: user.name || "",
-        email: user.email || "",
-      });
+      setFormData({ name: user.name || "", email: user.email || "" });
     }
   }, [user]);
 
   if (!user) {
-    return <p className="text-gray-500">Загрузка профиля...</p>;
+    return (
+      <p className="text-center text-offWhite dark:text-yellow mt-10">
+        Profil wird geladen...
+      </p>
+    );
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,40 +34,46 @@ export default function ProfileEditor() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto bg-white shadow-md rounded-xl p-6 space-y-4"
+      className="max-w-md mx-auto bg-offWhite dark:bg-darkGray rounded-2xl p-6 shadow-md space-y-6 transition-colors"
     >
-      <h2 className="text-xl font-semibold text-gray-700">
-        Редактировать профиль
+      <h2 className="text-2xl font-extrabold text-darkGray dark:text-yellow">
+        Profil bearbeiten
       </h2>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-600">Имя</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className="mt-1 w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300"
-        />
-      </div>
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-bold text-darkGray dark:text-yellow mb-1">
+            Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full border-2 border-darkGray dark:border-yellow rounded-lg px-3 py-2 bg-offWhite dark:bg-darkGray text-darkGray dark:text-yellow focus:outline-none focus:ring-2 focus:ring-green transition-colors"
+          />
+        </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-600">Email</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="mt-1 w-full border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300"
-        />
+        <div>
+          <label className="block text-sm font-bold text-darkGray dark:text-yellow mb-1">
+            E-Mail
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full border-2 border-darkGray dark:border-yellow rounded-lg px-3 py-2 bg-offWhite dark:bg-darkGray text-darkGray dark:text-yellow focus:outline-none focus:ring-2 focus:ring-green transition-colors"
+          />
+        </div>
       </div>
 
       <button
         type="submit"
         disabled={status === "loading"}
-        className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+        className="w-full bg-green dark:bg-yellow text-offWhite dark:text-darkGray font-bold py-2 px-4 rounded-lg hover:bg-darkGray hover:text-yellow transition-colors disabled:opacity-50"
       >
-        {status === "loading" ? "Сохраняем..." : "Сохранить"}
+        {status === "loading" ? "Speichern..." : "Speichern"}
       </button>
     </form>
   );
