@@ -1,59 +1,28 @@
 import axios from "axios";
-import {
-  lsGetToken,
-  lsRemoveToken,
-  lsSetToken,
-} from "../utils/localStorageUtils.js";
-import { store } from "../redux/store";
-import { fetchLogoutUser } from "../redux/auth/operations";
 
 const apiClient = axios.create({
   baseURL: "https://sprechmitbackend.onrender.com/api",
   withCredentials: true,
 });
 
-apiClient.interceptors.request.use((config) => {
-  const token = lsGetToken();
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
+
       try {
-        const refreshResponse = await axios.get("/auth/refresh", {
-          withCredentials: true,
-        });
-        const newAccessToken = refreshResponse?.data?.data?.accessToken;
-        if (!newAccessToken)
-          throw new Error("No accessToken in refresh response");
-        setAuthorizationToken(newAccessToken);
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        await apiClient.post("/auth/refresh");
         return apiClient(originalRequest);
       } catch (refreshError) {
-        deleteAuthorizationToken();
-        store.dispatch(fetchLogoutUser());
         return Promise.reject(refreshError);
       }
     }
+
     return Promise.reject(error);
   }
 );
-
-export const setAuthorizationToken = (token) => {
-  lsSetToken(token);
-  apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-
-export const deleteAuthorizationToken = () => {
-  lsRemoveToken();
-  delete apiClient.defaults.headers.common.Authorization;
-};
 
 export default apiClient;
