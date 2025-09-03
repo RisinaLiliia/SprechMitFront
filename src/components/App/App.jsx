@@ -9,6 +9,7 @@ import Layout from "../Layout/Layout.jsx";
 const HomePage = lazy(() => import("../../pages/HomePage.jsx"));
 const RegisterPage = lazy(() => import("../../pages/RegisterPage.jsx"));
 const LoginPage = lazy(() => import("../../pages/LoginPage.jsx"));
+const ProfilePage = lazy(() => import("../../pages/ProfilePage.jsx"));
 
 export default function App() {
   return (
@@ -20,9 +21,9 @@ export default function App() {
           <Route path="/auth/login" element={<LoginPage />} />
           <Route path="/auth/register" element={<RegisterPage />} />
 
-          {/* приватный роут с Layout */}
           <Route element={<PrivateRoute component={Layout} />}>
             <Route path="/dashboard" element={<HomePage />} />
+            <Route path="/profile" element={<ProfilePage />} />{" "}
           </Route>
         </Routes>
       </Suspense>

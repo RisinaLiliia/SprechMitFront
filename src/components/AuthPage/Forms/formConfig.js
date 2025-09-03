@@ -75,6 +75,6 @@ export const registerSchema = Yup.object().shape({
     .required("Confirm your password"),
   privacyPolicyAccepted: Yup.boolean().oneOf(
     [true],
-    "You must accept the Privacy Policy"
+    "You must accept the Privacy Policy",
   ),
 });
