@@ -20,8 +20,10 @@ export default function VocabularyList() {
   };
 
   return (
-    <div className="mt-6">
-      <h2 className="text-xl font-semibold mb-4">📚 Mein Wörterbuch</h2>
+    <div className="mt-6 max-w-md mx-auto">
+      <h2 className="text-2xl font-extrabold mb-4 text-darkGray dark:text-yellow">
+        📚 Mein Wörterbuch
+      </h2>
 
       <div className="flex gap-2 mb-4">
         <Input
@@ -36,22 +38,28 @@ export default function VocabularyList() {
             setNewWord({ ...newWord, translation: e.target.value })
           }
         />
-        <Button onClick={handleAddWord}>Hinzufügen</Button>
+        <Button
+          onClick={handleAddWord}
+          className="bg-green dark:bg-yellow text-offWhite dark:text-darkGray hover:bg-darkGray hover:text-yellow transition-colors"
+        >
+          Hinzufügen
+        </Button>
       </div>
 
       <ul className="space-y-2">
         {words.map((w) => (
           <li
             key={w.id}
-            className="flex justify-between items-center p-2 border rounded"
+            className="flex justify-between items-center p-2 border-2 border-darkGray dark:border-yellow rounded-xl bg-offWhite dark:bg-darkGray transition-colors"
           >
-            <span>
+            <span className="text-darkGray dark:text-yellow">
               {w.word} — {w.translation}
             </span>
             <Button
               variant="destructive"
               size="sm"
               onClick={() => handleDelete(w.id)}
+              className="bg-red dark:bg-yellow text-offWhite dark:text-darkGray hover:bg-darkGray hover:text-yellow transition-colors"
             >
               Löschen
             </Button>

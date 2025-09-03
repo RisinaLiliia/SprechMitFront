@@ -20,11 +20,13 @@ export default function AccountSettings() {
   };
 
   return (
-    <div className="mt-6">
-      <h2 className="text-xl font-semibold mb-4">⚙️ Kontoeinstellungen</h2>
+    <div className="mt-6 max-w-md mx-auto bg-offWhite dark:bg-darkGray p-6 rounded-2xl shadow-md transition-colors">
+      <h2 className="text-2xl font-extrabold mb-4 text-darkGray dark:text-yellow">
+        ⚙️ Kontoeinstellungen
+      </h2>
 
       <div className="flex flex-col gap-4">
-        <label>
+        <label className="text-darkGray dark:text-yellow font-bold">
           Aktuelles Passwort:
           <Input
             type="password"
@@ -34,7 +36,8 @@ export default function AccountSettings() {
             className="mt-1"
           />
         </label>
-        <label>
+
+        <label className="text-darkGray dark:text-yellow font-bold">
           Neues Passwort:
           <Input
             type="password"
@@ -44,7 +47,12 @@ export default function AccountSettings() {
             className="mt-1"
           />
         </label>
-        <Button onClick={handleSave} disabled={saving}>
+
+        <Button
+          onClick={handleSave}
+          disabled={saving}
+          className="bg-green dark:bg-yellow text-offWhite dark:text-darkGray hover:bg-darkGray hover:text-yellow transition-colors font-bold"
+        >
           {saving ? "💾 Speichern..." : "Passwort ändern"}
         </Button>
       </div>

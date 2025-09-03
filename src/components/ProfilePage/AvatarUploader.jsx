@@ -20,19 +20,19 @@ export default function AvatarUploader() {
     try {
       await dispatch(updateUser({ avatarUrl: reader.result })).unwrap();
     } catch (err) {
-      console.error("Ошибка при обновлении аватара:", err);
+      console.error("Fehler beim Hochladen des Avatars:", err);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center gap-4 mb-6">
+    <div className="flex flex-col md:flex-row items-center gap-4 mb-6 transition-colors">
       <label className="cursor-pointer">
         <img
           src={preview || "/default-avatar.png"}
           alt="avatar"
-          className="w-24 h-24 rounded-full border object-cover hover:ring-2 hover:ring-green-500 transition"
+          className="w-24 h-24 rounded-full border-2 border-darkGray dark:border-yellow object-cover hover:ring-2 hover:ring-green transition"
           onError={(e) => (e.target.src = "/default-avatar.png")}
         />
         <input
@@ -42,10 +42,17 @@ export default function AvatarUploader() {
           onChange={handleFileChange}
         />
       </label>
-      {loading && <p className="text-sm text-gray-500">💾 Wir sparen...</p>}
-      <div>
-        <p className="text-lg font-semibold">{user?.name}</p>
-        <p className="text-gray-500">{user?.email}</p>
+
+      <div className="text-center md:text-left">
+        {loading && (
+          <p className="text-sm text-darkGray dark:text-yellow animate-pulse">
+            💾 Lädt...
+          </p>
+        )}
+        <p className="text-lg font-bold text-darkGray dark:text-yellow">
+          {user?.name}
+        </p>
+        <p className="text-gray-600 dark:text-yellow/80">{user?.email}</p>
       </div>
     </div>
   );
