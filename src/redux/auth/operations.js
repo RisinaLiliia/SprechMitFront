@@ -10,7 +10,7 @@ export const fetchRegisterUser = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  }
+  },
 );
 
 export const fetchLoginUser = createAsyncThunk(
@@ -22,7 +22,7 @@ export const fetchLoginUser = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  }
+  },
 );
 
 export const fetchLogoutUser = createAsyncThunk(
@@ -33,5 +33,5 @@ export const fetchLogoutUser = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  }
+  },
 );
