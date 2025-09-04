@@ -3,7 +3,7 @@ import Header from "./Header";
 
 export default function Layout() {
   return (
-    <div className="min-h-screen flex flex-col bg-background dark:bg-darkGray transition-colors">
+    <div className="min-h-screen flex flex-col bg-offWhite dark:bg-darkGray transition-colors">
       <Header />
       <main className="flex-grow p-6">
         <Outlet />

@@ -12,13 +12,18 @@ export default function AvatarUploader() {
     const file = e.target.files[0];
     if (!file) return;
 
+    // Создаем превью изображения для отображения на фронте
     const reader = new FileReader();
     reader.onloadend = () => setPreview(reader.result);
     reader.readAsDataURL(file);
 
     setLoading(true);
     try {
-      await dispatch(updateUser({ avatarUrl: reader.result })).unwrap();
+      const formData = new FormData();
+      formData.append("avatar", file); // Добавляем файл в formData
+
+      const response = await dispatch(updateUser(formData)).unwrap();
+      console.log(response); // Ответ с обновленным пользователем
     } catch (err) {
       console.error("Fehler beim Hochladen des Avatars:", err);
     } finally {

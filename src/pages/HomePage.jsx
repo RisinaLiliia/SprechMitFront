@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/auth/selectors";
 import ProgressBar from "../components/ProgressBar/ProgressBar.jsx";
-import BadgeNotification from "../components/BadgeNotification/BadgeNotification.jsx";
-import OnboardingTips from "../components/OnboardingTips/OnboardingTips.jsx";
+import BadgeNotification from "../components/HomePage/BadgeNotification/BadgeNotification.jsx";
+import OnboardingTips from "../components/HomePage/OnboardingTips/OnboardingTips.jsx";
 
 export default function HomePage() {
   const user = useSelector(selectUser);

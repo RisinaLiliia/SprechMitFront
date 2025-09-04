@@ -14,15 +14,15 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-between items-center px-4 md:px-6 py-3 md:py-4 bg-offWhite dark:bg-darkGray transition-colors font-main shadow-md">
+    <header className="flex justify-between items-center px-6 py-4 bg-offWhite dark:bg-darkGray transition-colors font-main shadow-md">
       <Link
         to={user ? "/dashboard" : "/"}
-        className="text-xl md:text-2xl font-extrabold uppercase tracking-tight text-green dark:text-yellow"
+        className="text-2xl font-extrabold uppercase tracking-tight text-green dark:text-yellow"
       >
         SprechMit
       </Link>
 
-      <div className="flex items-center gap-3 md:gap-4">
+      <div className="flex items-center gap-4">
         {user && (
           <>
             <span className="hidden md:inline font-bold text-darkGray dark:text-offWhite">
@@ -31,7 +31,7 @@ export default function Header() {
 
             <Link
               to="/profile"
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors focus:ring-2 focus:ring-green"
               title="Profil"
             >
               <FiUser className="w-6 h-6 text-gray-700 dark:text-gray-200" />
@@ -40,7 +40,7 @@ export default function Header() {
             <button
               onClick={handleLogout}
               title="Abmelden"
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-red text-offWhite hover:bg-yellow hover:text-darkGray transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-red text-offWhite hover:bg-yellow hover:text-darkGray transition-colors focus:ring-2 focus:ring-green"
             >
               <FiLogOut className="w-6 h-6" />
             </button>

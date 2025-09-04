@@ -15,10 +15,13 @@ export const fetchCurrentUser = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
   "user/updateUser",
-  async (updates, thunkAPI) => {
+  async (formData, thunkAPI) => {
     try {
-      const { data } = await apiClient.put("/users", updates, {
+      const { data } = await apiClient.put("/users", formData, {
         withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
       return data.data;
     } catch (err) {
