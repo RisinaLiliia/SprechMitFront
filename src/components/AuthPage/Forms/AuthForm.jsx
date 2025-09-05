@@ -10,6 +10,7 @@ import {
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import FormField from "./FormField";
+import Loader from "../../shared/Loader/Loader";
 
 export default function AuthForm({
   title,
@@ -69,9 +70,9 @@ export default function AuthForm({
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full mt-4 bg-green text-offWhite rounded-none font-bold uppercase tracking-wide hover:bg-yellow hover:text-darkGray transition-colors duration-200"
+                    className="w-full mt-4 bg-green text-offWhite rounded-none font-bold uppercase tracking-wide hover:bg-yellow hover:text-darkGray transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? "..." : submitText}
+                    {isSubmitting ? <Loader text="Senden..." /> : submitText}
                   </Button>
 
                   <p className="text-center text-sm mt-3 mb-6 text-darkGray">

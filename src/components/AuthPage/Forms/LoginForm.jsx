@@ -1,7 +1,11 @@
 import AuthForm from "./AuthForm";
 import { useAuthForm } from "../../../hooks/useAuthForm";
 import { fetchLoginUser } from "../../../redux/auth/operations";
-import { loginSchema, loginInitialValues, loginFields } from "./formConfig";
+import {
+  loginSchema,
+  loginInitialValues,
+  loginFields,
+} from "../FormConfig/loginConfig";
 
 export default function LoginForm() {
   const { handleSubmit } = useAuthForm(fetchLoginUser);
