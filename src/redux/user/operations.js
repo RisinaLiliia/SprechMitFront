@@ -10,7 +10,7 @@ export const fetchCurrentUser = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  }
+  },
 );
 
 export const updateUser = createAsyncThunk(
@@ -27,7 +27,7 @@ export const updateUser = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  }
+  },
 );
 
 export const updatePassword = createAsyncThunk(
@@ -41,5 +41,5 @@ export const updatePassword = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || err.message);
     }
-  }
+  },
 );

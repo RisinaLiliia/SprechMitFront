@@ -5,7 +5,7 @@ import {
   registerSchema,
   registerInitialValues,
   registerFields,
-} from "./formConfig";
+} from "../FormConfig/registerConfig";
 
 export default function RegistrationForm() {
   const { handleSubmit } = useAuthForm(fetchRegisterUser);
