@@ -12,25 +12,26 @@ function Button({
   const Comp = asChild ? Slot : "button";
 
   const baseClasses =
-    "inline-flex items-center justify-center rounded-md font-medium transition-all duration-150 ease-in-out disabled:pointer-events-none disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-700";
+    "inline-flex items-center justify-center font-medium transition-all duration-150 ease-in-out rounded-xl disabled:pointer-events-none disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary";
 
   const variantClasses = {
     default:
-      "bg-green text-offWhite hover:brightness-90 active:brightness-75 active:scale-95",
+      "bg-primary text-primary-foreground hover:brightness-95 active:brightness-90 active:scale-95 shadow-sm",
     outline:
-      "border border-green text-green bg-transparent hover:bg-green hover:text-offWhite hover:brightness-95 active:brightness-75 active:scale-95",
-    destructive:
-      "bg-red text-offWhite hover:brightness-95 active:brightness-75 active:scale-95",
+      "border border-foreground/20 text-foreground bg-transparent hover:bg-foreground/5 active:scale-95",
     secondary:
-      "bg-yellow text-darkGray hover:brightness-95 active:brightness-75",
-    ghost: "bg-transparent hover:bg-lightGray hover:text-darkGray",
-    link: "text-green underline-offset-4 hover:underline",
+      "bg-secondary text-secondary-foreground hover:brightness-95 active:scale-95",
+    destructive:
+      "bg-clay text-linen hover:brightness-95 active:brightness-90 active:scale-95",
+    ghost: "bg-transparent text-foreground hover:bg-muted/20 active:scale-95",
+    link: "text-primary underline-offset-4 hover:underline active:scale-95",
+    tag: "border border-foreground/15 dark:border-foreground/30 bg-background/60 backdrop-blur-sm text-foreground shadow-sm hover:shadow active:scale-95",
   };
 
   const sizeClasses = {
-    default: "h-9 px-4 text-sm",
+    default: "h-10 px-5 text-sm",
     sm: "h-8 px-3 text-xs",
-    lg: "h-10 px-6 text-base",
+    lg: "h-12 px-6 text-base",
   };
 
   return (
@@ -39,7 +40,7 @@ function Button({
         baseClasses,
         variantClasses[variant],
         sizeClasses[size],
-        className,
+        className
       )}
       {...props}
     />

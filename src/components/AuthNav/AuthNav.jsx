@@ -1,32 +1,15 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { Button } from "../ui/button";
 
-export default function AuthNav() {
-  const baseClasses =
-    "px-4 py-2 rounded-lg transition font-medium hover:bg-green/10";
-  const activeClasses = "text-green font-semibold border-b-2 border-green";
-
+export default function AuthNav({ onLoginClick, onRegisterClick }) {
   return (
-    <nav className="flex gap-4 justify-center">
-      <NavLink
-        to="/auth/login"
-        className={({ isActive }) =>
-          `${baseClasses} ${
-            isActive ? activeClasses : "text-gray-600 dark:text-gray-300"
-          }`
-        }
-      >
+    <nav className="flex gap-4 items-center">
+      <Button variant="outline" size="default" onClick={onLoginClick}>
         Login
-      </NavLink>
-      <NavLink
-        to="/auth/register"
-        className={({ isActive }) =>
-          `${baseClasses} ${
-            isActive ? activeClasses : "text-gray-600 dark:text-gray-300"
-          }`
-        }
-      >
+      </Button>
+      <Button variant="outline" size="default" onClick={onRegisterClick}>
         Register
-      </NavLink>
+      </Button>
     </nav>
   );
 }

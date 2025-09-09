@@ -40,6 +40,6 @@ export const registerSchema = Yup.object().shape({
     .required("Bitte bestätigen Sie Ihr Passwort"),
   privacyPolicyAccepted: Yup.boolean().oneOf(
     [true],
-    "Sie müssen die Datenschutzerklärung akzeptieren"
+    "Sie müssen die Datenschutzerklärung akzeptieren",
   ),
 });
