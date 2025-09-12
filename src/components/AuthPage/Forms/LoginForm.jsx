@@ -7,7 +7,7 @@ import {
   loginFields,
 } from "../FormConfig/loginConfig";
 
-export default function LoginForm() {
+export default function LoginForm({ switchTab }) {
   const { handleSubmit } = useAuthForm(fetchLoginUser);
 
   return (
@@ -20,8 +20,8 @@ export default function LoginForm() {
       onSubmit={handleSubmit}
       submitText="Anmelden"
       alternativeText="Noch kein Konto?"
-      alternativeLink="/auth/register"
       alternativeLinkText="Registrieren"
+      switchTab={switchTab}
     />
   );
 }

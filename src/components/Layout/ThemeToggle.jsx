@@ -1,31 +1,16 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import { Moon, Sun } from "lucide-react";
 
-export default function ThemeToggle() {
-  const [dark, setDark] = useState(() =>
-    document.documentElement.classList.contains("dark"),
-  );
-
-  useEffect(() => {
-    if (dark) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [dark]);
-
+export default function ThemeToggle({ isDark, toggleDark }) {
   return (
     <button
-      onClick={() => setDark((prev) => !prev)}
-      className="p-2 rounded-full bg-offWhite dark:bg-darkGray border border-darkGray dark:border-offWhite hover:bg-green dark:hover:bg-yellow focus:ring-2 focus:ring-green transition-colors duration-200 flex items-center justify-center"
+      onClick={toggleDark}
+      className="inline-flex items-center gap-2 rounded-xl border border-muted/50 px-3 py-2 text-sm hover:bg-muted/30 transition"
+      aria-label="Theme umschalten"
+      title="Тема"
     >
-      {dark ? (
-        <Sun className="w-5 h-5 text-yellow dark:text-green hover:text-white focus:text-white transition-colors" />
-      ) : (
-        <Moon className="w-5 h-5 text-green dark:text-yellow hover:text-white focus:text-white transition-colors" />
-      )}
+      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      <span className="hidden sm:inline">{isDark ? "Hell" : "Dunkel"}</span>
     </button>
   );
 }

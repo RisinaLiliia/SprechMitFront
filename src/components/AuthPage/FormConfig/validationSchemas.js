@@ -16,7 +16,7 @@ export const passwordSchema = Yup.string()
 export const nameSchema = Yup.string()
   .matches(
     /^[\p{L}\s'-]+$/u,
-    "Nur Buchstaben, Leerzeichen, - und ' sind erlaubt"
+    "Nur Buchstaben, Leerzeichen, - und ' sind erlaubt",
   )
   .max(16, "Maximal 16 Zeichen")
   .required("Name ist erforderlich");

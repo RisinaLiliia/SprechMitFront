@@ -7,7 +7,7 @@ import {
   registerFields,
 } from "../FormConfig/registerConfig";
 
-export default function RegistrationForm() {
+export default function RegistrationForm({ switchTab }) {
   const { handleSubmit } = useAuthForm(fetchRegisterUser);
 
   return (
@@ -22,6 +22,7 @@ export default function RegistrationForm() {
       alternativeText="Schon ein Konto?"
       alternativeLink="/auth/login"
       alternativeLinkText="Anmelden"
+      switchTab={switchTab}
     />
   );
 }

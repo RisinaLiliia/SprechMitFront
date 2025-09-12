@@ -1,21 +1,21 @@
-/* normalize должен быть первым */
+/* === Normalize первым === */
 @import "modern-normalize";
 
-/* Tailwind v3 директивы */
+/* Tailwind директивы */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* === Цветовые переменные (light/dark) === */
 :root {
-  --dark-gray: #2e2e2e;
-  --green: #3c6e47;
-  --yellow: #eeba2b;
-  --red: #d14b46;
-  --light-gray: #b6ccd7;
-  --off-white: #f2f2f2;
+  --forest: #3c6e47; /* зелёный леса */
+  --sand: #e4c988;   /* мягкий песочный */
+  --clay: #c46744;   /* тёплая глина */
+  --stone: #cfd8dc;  /* светлый камень */
+  --charcoal: #2f2f2f; /* древесный уголь */
+  --linen: #f9f7f4;   /* натуральный белый */
 
-  --font-main: "Roboto", sans-serif;
+  --font-main: "Inter", sans-serif;
   --font-heading: "Montserrat", sans-serif;
 
   --font-size-base: 16px;
@@ -24,19 +24,19 @@
 }
 
 .dark {
-  --dark-gray: #2e2e2e;
-  --green: #3c6e47;
-  --yellow: #eeba2b;
-  --red: #d14b46;
-  --light-gray: #b6ccd7;
-  --off-white: #f2f2f2;
+  --forest: #5fa274;
+  --sand: #d6a858;
+  --clay: #a84f3c;
+  --stone: #8d9ca3;
+  --charcoal: #e5e5e5;
+  --linen: #1b1b1b;
 }
 
 html {
   font-family: var(--font-main);
   font-size: var(--font-size-base);
-  background-color: var(--off-white);
-  color: var(--dark-gray);
+  background-color: var(--linen);
+  color: var(--charcoal);
 }
 
 h1,
@@ -46,9 +46,32 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
-/* === Базовая типографика === */
+/* === Базовая типографика и комфорт === */
 body {
-  @apply bg-offWhite text-darkGray font-main text-base antialiased transition-colors;
+  @apply bg-background text-foreground font-main text-base antialiased leading-relaxed transition-colors;
+}
+
+/* Кнопки/карточки — лёгкость и мягкость */
+.card {
+  @apply bg-background shadow-md rounded-2xl p-6;
+}
+
+.button-primary {
+  @apply bg-primary text-primary-foreground rounded-xl px-4 py-2 font-semibold hover:opacity-90 transition;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px var(--linen) inset !important;
+  box-shadow: 0 0 0px 1000px var(--linen) inset !important;
+  -webkit-text-fill-color: var(--charcoal) !important;
+  transition: background-color 9999s ease-in-out 0s; 
 }

@@ -1,5 +1,6 @@
 import { Formik, Form } from "formik";
-import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardHeader,
@@ -7,8 +8,6 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/card";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import FormField from "./FormField";
 import Loader from "../../shared/Loader/Loader";
 
@@ -20,32 +19,27 @@ export default function AuthForm({
   fields,
   onSubmit,
   submitText,
+  switchTab,
   alternativeText,
-  alternativeLink,
   alternativeLinkText,
 }) {
   return (
-    <div className="flex justify-center items-center min-h-screen px-4 bg-background font-main">
+    <div className="flex justify-center items-center w-full">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="w-full max-w-md"
       >
-        <Card className="w-full border border-darkGray rounded-none shadow-none">
-          <CardHeader className="text-center mb-4">
-            <CardTitle className="text-3xl font-extrabold uppercase tracking-tight text-darkGray font-heading">
+        <Card className="w-full rounded-2xl shadow-md p-1 flex flex-col">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl font-semibold text-foreground font-heading -mt-1 sm:text-xl md:text-2xl">
               {title}
             </CardTitle>
-            <CardDescription className="text-darkGray mt-2 mb-4">
+
+            <CardDescription className="text-foreground/70 mt-1 mb-1 text-base leading-relaxed sm:text-sm md:text-base">
               {description}
             </CardDescription>
-
-            <div className="flex justify-center gap-2 mt-4">
-              <span className="w-10 h-1 bg-red" />
-              <span className="w-10 h-1 bg-yellow" />
-              <span className="w-10 h-1 bg-darkGray" />
-            </div>
           </CardHeader>
 
           <CardContent>
@@ -55,35 +49,37 @@ export default function AuthForm({
               onSubmit={onSubmit}
             >
               {({ isSubmitting }) => (
-                <Form className="flex flex-col gap-4">
-                  {fields.map((field, index) => (
-                    <motion.div
-                      key={field.name}
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05, duration: 0.2 }}
-                    >
-                      <FormField {...field} />
-                    </motion.div>
+                <Form className="flex flex-col gap-2">
+                  {fields.map((field) => (
+                    <FormField key={field.name} {...field} />
                   ))}
 
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full mt-4 bg-green text-offWhite rounded-none font-bold uppercase tracking-wide hover:bg-yellow hover:text-darkGray transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full py-3 mt-2 rounded-xl bg-forest text-linen font-semibold hover:bg-forest/90 transition"
                   >
                     {isSubmitting ? <Loader text="Senden..." /> : submitText}
                   </Button>
 
-                  <p className="text-center text-sm mt-3 mb-6 text-darkGray">
-                    {alternativeText}{" "}
-                    <Link
-                      to={alternativeLink}
-                      className="text-green hover:text-darkGray hover:underline transition-colors"
-                    >
-                      {alternativeLinkText}
-                    </Link>
-                  </p>
+                  {switchTab && (
+                    <div className="text-center mt-2">
+                      <button
+                        type="button"
+                        onClick={switchTab}
+                        className="text-sm text-charcoal font-medium focus:outline-none"
+                      >
+                        {alternativeText}{" "}
+                        <motion.span
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="text-clay hover:text-forest focus:text-forest transition-colors duration-200 ease-in-out"
+                        >
+                          {alternativeLinkText}
+                        </motion.span>
+                      </button>
+                    </div>
+                  )}
                 </Form>
               )}
             </Formik>

@@ -1,11 +1,12 @@
+import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
-export default function Layout() {
+export default function Layout({ onLoginClick, onRegisterClick }) {
   return (
-    <div className="min-h-screen flex flex-col bg-offWhite dark:bg-darkGray transition-colors">
-      <Header />
-      <main className="flex-grow p-6">
+    <div className="min-h-screen flex flex-col">
+      <Header onLoginClick={onLoginClick} onRegisterClick={onRegisterClick} />
+      <main className="flex-1">
         <Outlet />
       </main>
     </div>
