@@ -9,14 +9,16 @@
 /* === Цветовые переменные (light/dark) === */
 :root {
   --forest: #3c6e47; /* зелёный леса */
-  --sand: #e4c988;   /* мягкий песочный */
-  --clay: #c46744;   /* тёплая глина */
-  --stone: #cfd8dc;  /* светлый камень */
+  --sand: #e4c988; /* мягкий песочный */
+  --clay: #c46744; /* тёплая глина */
+  --stone: #cfd8dc; /* светлый камень */
   --charcoal: #2f2f2f; /* древесный уголь */
-  --linen: #f9f7f4;   /* натуральный белый */
+  --linen: #f9f7f4; /* натуральный белый */
 
   --font-main: "Inter", sans-serif;
-  --font-heading: "Montserrat", sans-serif;
+  /* --font-heading: "Montserrat", sans-serif; */
+
+  --font-heading: "Geist", sans-serif;
 
   --font-size-base: 16px;
   --font-size-heading: 24px;
@@ -50,12 +52,10 @@ h6 {
   letter-spacing: -0.02em;
 }
 
-/* === Базовая типографика и комфорт === */
 body {
   @apply bg-background text-foreground font-main text-base antialiased leading-relaxed transition-colors;
 }
 
-/* Кнопки/карточки — лёгкость и мягкость */
 .card {
   @apply bg-background shadow-md rounded-2xl p-6;
 }
@@ -73,5 +73,5 @@ textarea:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px var(--linen) inset !important;
   box-shadow: 0 0 0px 1000px var(--linen) inset !important;
   -webkit-text-fill-color: var(--charcoal) !important;
-  transition: background-color 9999s ease-in-out 0s; 
+  transition: background-color 9999s ease-in-out 0s;
 }

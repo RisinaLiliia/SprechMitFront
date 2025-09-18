@@ -6,7 +6,7 @@ function Label({ className, ...props }) {
     <label
       className={cn(
         "block text-sm font-medium text-foreground/80 tracking-tight mb-1",
-        className
+        className,
       )}
       {...props}
     />

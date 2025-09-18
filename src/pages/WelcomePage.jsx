@@ -9,7 +9,7 @@ import backgroundImg from "../components/Assets/photo-1467269204594-9661b134dd2b
 import musicFile from "../components/Assets/mixkit-classical-vibes-5-688.mp3";
 
 import AuthModal from "../components/AuthModal/AuthModal";
-import Footer from "@/components/WelcomeScreen/Footer";
+import Footer from "@/components/Footer/Footer";
 
 export default function IchBinLanding() {
   const [isDark, setIsDark] = useState(() => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,8 +6,10 @@ import { IchBinLogo } from "../Logo/Logo";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 import AudioControls from "../WelcomeScreen/AudioControls";
-import AuthNav from "../AuthNav/AuthNav";
 import { fetchLogoutUser } from "../../redux/auth/operations";
+import BurgerMenu from "./BurgerMenu.jsx";
+import AuthNav from "../AuthNav/AuthNav";
+import { AuthButtons } from "../AuthNav/AuthButtons";
 
 export default function Header({
   isDark,
@@ -21,12 +23,39 @@ export default function Header({
   const dispatch = useDispatch();
   const { isLoggedIn, user } = useSelector((state) => state.auth);
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
+
   const handleLogout = () => {
     dispatch(fetchLogoutUser());
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolling(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const buttonTextColor = isDark ? "text-white" : "text-black";
+  const buttonHoverColor = isDark ? "hover:text-sand" : "hover:text-forest";
+  const buttonFocusColor = isDark
+    ? "focus:ring-2 focus:ring-forest"
+    : "focus:ring-2 focus:ring-sand";
+
   return (
-    <header className="w-full sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+    <header
+      className={`w-full sticky top-0 z-30 transition-all duration-300 ${
+        scrolling ? "backdrop-blur-md bg-background/70" : "bg-transparent"
+      }`}
+    >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-4 flex items-center justify-between">
         <a href="#" className="hover:scale-110 transition-transform">
           <motion.div
@@ -37,8 +66,7 @@ export default function Header({
             <IchBinLogo />
           </motion.div>
         </a>
-
-        <div className="flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           {!isLoggedIn ? (
             <AuthNav
               onLoginClick={onLoginClick}
@@ -73,6 +101,27 @@ export default function Header({
               </button>
             </>
           )}
+        </div>
+        <div className="lg:hidden flex items-center gap-3">
+          <button
+            onClick={toggleMenu}
+            className={`text-forest hover:text-sand focus:outline-none ${buttonTextColor}`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
 
           <ThemeToggle isDark={isDark} toggleDark={toggleDark} />
 
@@ -82,7 +131,30 @@ export default function Header({
             togglePlay={togglePlay}
           />
         </div>
+
+        <div className="hidden lg:flex items-center gap-4">
+          <AuthButtons
+            onLoginClick={onLoginClick}
+            onRegisterClick={onRegisterClick}
+            isDark={isDark}
+          />
+
+          <ThemeToggle isDark={isDark} toggleDark={toggleDark} />
+          <AudioControls
+            audioRef={audioRef}
+            isPlaying={isPlaying}
+            togglePlay={togglePlay}
+          />
+        </div>
       </div>
+
+      <BurgerMenu
+        isMenuOpen={isMenuOpen}
+        toggleMenu={toggleMenu}
+        buttonTextColor={buttonTextColor}
+        buttonHoverColor={buttonHoverColor}
+        buttonFocusColor={buttonFocusColor}
+      />
     </header>
   );
 }

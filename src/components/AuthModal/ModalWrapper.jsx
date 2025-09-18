@@ -14,7 +14,6 @@ export default function ModalWrapper({ isOpen, onClose, children }) {
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
@@ -23,7 +22,6 @@ export default function ModalWrapper({ isOpen, onClose, children }) {
             onClick={onClose}
           />
 
-          {/* Modal Content */}
           <motion.div
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -35,7 +33,6 @@ export default function ModalWrapper({ isOpen, onClose, children }) {
               className="relative w-full max-w-md bg-background rounded-2xl shadow-lg p-4 sm:p-8 max-h-[100vh] flex flex-col justify-center"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button */}
               <div className="flex justify-end mb-1">
                 <button
                   onClick={onClose}
@@ -45,7 +42,6 @@ export default function ModalWrapper({ isOpen, onClose, children }) {
                 </button>
               </div>
 
-              {/* Modal Content */}
               <div className="flex-1 flex flex-col justify-center space-y-2">
                 {children}
               </div>

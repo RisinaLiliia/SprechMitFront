@@ -40,7 +40,7 @@ function Button({
         baseClasses,
         variantClasses[variant],
         sizeClasses[size],
-        className
+        className,
       )}
       {...props}
     />

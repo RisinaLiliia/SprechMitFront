@@ -1,20 +1,5 @@
 import React, { useEffect, useRef } from "react";
 
-/**
- * WaveformCanvas.jsx
- * Компонент рисует временную форму (time-domain waveform) аудио.
- *
- * Props:
- * - audioRef: React ref на <audio> элемент (обязательно)
- * - height: высота канвы в px (по умолчанию 48)
- *
- * Особенности:
- * - Использует WebAudio AnalyserNode (fftSize = 2048)
- * - Подключается к audio element при событии 'play' (избегаем проблем со стартом AudioContext)
- * - Останавливает requestAnimationFrame при размонтировании
- * - Рисует линию волны с учётом devicePixelRatio для чёткости
- */
-
 export default function WaveformCanvas({
   audioRef,
   height = 48,
@@ -90,7 +75,7 @@ export default function WaveformCanvas({
       ctx.lineWidth = 2;
       const cssColor =
         getComputedStyle(document.documentElement).getPropertyValue(
-          " --sand"
+          " --sand",
         ) || "#e4c988";
       ctx.strokeStyle = cssColor.trim();
       ctx.beginPath();

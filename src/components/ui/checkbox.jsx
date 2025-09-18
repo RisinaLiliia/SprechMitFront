@@ -8,7 +8,7 @@ function Checkbox({ className, ...props }) {
     <CheckboxPrimitive.Root
       className={cn(
         "w-5 h-5 rounded-md border border-stone/40 bg-background data-[state=checked]:bg-forest data-[state=checked]:border-forest focus:outline-none focus:ring-2 focus:ring-forest/40 transition-colors",
-        className
+        className,
       )}
       {...props}
     >

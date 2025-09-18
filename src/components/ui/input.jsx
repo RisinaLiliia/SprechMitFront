@@ -10,7 +10,7 @@ function Input({ className, type = "text", ...props }) {
         "focus:outline-none focus:border-forest focus:ring-2 focus:ring-forest",
         "aria-[invalid=true]:border-clay aria-[invalid=true]:focus:border-clay aria-[invalid=true]:focus:ring-clay",
         "disabled:opacity-50 disabled:cursor-not-allowed",
-        className
+        className,
       )}
       {...props}
     />
