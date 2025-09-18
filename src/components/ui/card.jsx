@@ -6,7 +6,7 @@ function Card({ className, ...props }) {
     <div
       className={cn(
         "bg-background text-foreground flex flex-col gap-4 rounded-2xl border border-stone/30 shadow-sm hover:shadow-md transition-shadow",
-        className
+        className,
       )}
       {...props}
     />
@@ -44,7 +44,7 @@ function CardFooter({ className, ...props }) {
     <div
       className={cn(
         "flex items-center px-6 pt-4 border-t border-stone/20",
-        className
+        className,
       )}
       {...props}
     />

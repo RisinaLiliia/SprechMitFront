@@ -66,8 +66,8 @@ export default function FormField({
                   errors[name] && touched[name]
                     ? "border border-clay"
                     : isValid
-                    ? "border border-forest"
-                    : "border border-stone/40"
+                      ? "border border-forest"
+                      : "border border-stone/40"
                 }`}
             />
 

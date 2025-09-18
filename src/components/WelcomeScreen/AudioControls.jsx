@@ -1,15 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Play, Pause } from "lucide-react";
 
-export default function AudioControls({ audioRef, isPlaying, togglePlay }) {
-  useEffect(() => {
-    const el = audioRef?.current;
-    if (!el) return;
-    const onEnded = () => {};
-    el.addEventListener("ended", onEnded);
-    return () => el.removeEventListener("ended", onEnded);
-  }, [audioRef]);
-
+export default function AudioControls({ isPlaying, togglePlay }) {
   return (
     <div className="flex items-center gap-2">
       <button
