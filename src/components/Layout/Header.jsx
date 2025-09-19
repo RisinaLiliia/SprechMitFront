@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { IchBinLogo } from "../Logo/Logo";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
-import AudioControls from "../WelcomeScreen/AudioControls";
+import AudioControls from "./AudioControls";
 import { fetchLogoutUser } from "../../redux/auth/operations";
 import BurgerMenu from "./BurgerMenu.jsx";
 import AuthNav from "../AuthNav/AuthNav";
 import { AuthButtons } from "../AuthNav/AuthButtons";
+import { Button } from "../ui/button";
 
 export default function Header({
   isDark,
@@ -30,9 +31,9 @@ export default function Header({
     dispatch(fetchLogoutUser());
   };
 
-  const toggleMenu = () => {
+  const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev);
-  };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,16 +45,16 @@ export default function Header({
     };
   }, []);
 
-  const buttonTextColor = isDark ? "text-white" : "text-black";
-  const buttonHoverColor = isDark ? "hover:text-sand" : "hover:text-forest";
-  const buttonFocusColor = isDark
-    ? "focus:ring-2 focus:ring-forest"
-    : "focus:ring-2 focus:ring-sand";
+  const buttonStyles = isDark
+    ? "text-white hover:text-sand focus:ring-2 focus:ring-forest"
+    : "text-black hover:text-forest focus:ring-2 focus:ring-sand";
 
   return (
     <header
-      className={`w-full sticky top-0 z-30 transition-all duration-300 ${
-        scrolling ? "backdrop-blur-md bg-background/70" : "bg-transparent"
+      className={`w-full fixed top-0 left-0 z-30 transition-all duration-300 ${
+        scrolling
+          ? "backdrop-blur-sm bg-background/90 shadow-lg"
+          : "bg-transparent"
       }`}
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-4 flex items-center justify-between">
@@ -66,6 +67,7 @@ export default function Header({
             <IchBinLogo />
           </motion.div>
         </a>
+
         <div className="hidden lg:flex items-center gap-3">
           {!isLoggedIn ? (
             <AuthNav
@@ -92,20 +94,23 @@ export default function Header({
                 )}
               </Link>
 
-              <button
+              <Button
+                variant="destructive"
                 onClick={handleLogout}
                 title="Abmelden"
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-clay text-linen hover:bg-sand hover:text-charcoal transition-colors focus:ring-2 focus:ring-forest"
+                className="w-10 h-10 rounded-full"
               >
                 <FiLogOut className="w-6 h-6" />
-              </button>
+              </Button>
             </>
           )}
         </div>
+
         <div className="lg:hidden flex items-center gap-3">
-          <button
+          <Button
+            variant="link"
             onClick={toggleMenu}
-            className={`text-forest hover:text-sand focus:outline-none ${buttonTextColor}`}
+            className={`text-forest hover:text-sand focus:outline-none ${buttonStyles}`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -121,10 +126,9 @@ export default function Header({
                 d="M4 6h16M4 12h16M4 18h16"
               ></path>
             </svg>
-          </button>
+          </Button>
 
           <ThemeToggle isDark={isDark} toggleDark={toggleDark} />
-
           <AudioControls
             audioRef={audioRef}
             isPlaying={isPlaying}
@@ -151,9 +155,7 @@ export default function Header({
       <BurgerMenu
         isMenuOpen={isMenuOpen}
         toggleMenu={toggleMenu}
-        buttonTextColor={buttonTextColor}
-        buttonHoverColor={buttonHoverColor}
-        buttonFocusColor={buttonFocusColor}
+        buttonStyles={buttonStyles}
       />
     </header>
   );

@@ -10,34 +10,37 @@ export default function AuthNav({ isDark }) {
 
   return (
     <nav className="flex gap-4 items-center">
-      <Button asChild variant="outline" size="default">
-        <Link to="/blog" className={`${buttonHoverColor} ${buttonFocusColor}`}>
-          Blog
-        </Link>
+      <Button
+        asChild
+        variant="outline"
+        size="default"
+        className={`${buttonHoverColor} ${buttonFocusColor}`}
+      >
+        <Link to="/blog">Blog</Link>
       </Button>
-      <Button asChild variant="outline" size="default">
-        <Link
-          to="/grammar"
-          className={` ${buttonHoverColor} ${buttonFocusColor}`}
-        >
-          Grammatik
-        </Link>
+      <Button
+        asChild
+        variant="outline"
+        size="default"
+        className={`${buttonHoverColor} ${buttonFocusColor}`}
+      >
+        <Link to="/grammar">Grammatik</Link>
       </Button>
-      <Button asChild variant="outline" size="default">
-        <Link
-          to="/training"
-          className={`${buttonHoverColor} ${buttonFocusColor}`}
-        >
-          Training
-        </Link>
+      <Button
+        asChild
+        variant="outline"
+        size="default"
+        className={`${buttonHoverColor} ${buttonFocusColor}`}
+      >
+        <Link to="/training">Training</Link>
       </Button>
-      <Button asChild variant="outline" size="default">
-        <Link
-          to="/live-exchange"
-          className={` ${buttonHoverColor} ${buttonFocusColor}`}
-        >
-          Chats
-        </Link>
+      <Button
+        asChild
+        variant="outline"
+        size="default"
+        className={`${buttonHoverColor} ${buttonFocusColor}`}
+      >
+        <Link to="/live-exchange">Chats</Link>
       </Button>
     </nav>
   );

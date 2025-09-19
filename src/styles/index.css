@@ -1,12 +1,12 @@
 /* === Normalize первым === */
-@import "modern-normalize";
+@import 'modern-normalize';
 
 /* Tailwind директивы */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* === Цветовые переменные (light/dark) === */
+/* === Цветовые переменные === */
 :root {
   --forest: #3c6e47; /* зелёный леса */
   --sand: #e4c988; /* мягкий песочный */
@@ -15,16 +15,11 @@
   --charcoal: #2f2f2f; /* древесный уголь */
   --linen: #f9f7f4; /* натуральный белый */
 
-  --font-main: "Inter", sans-serif;
-  /* --font-heading: "Montserrat", sans-serif; */
-
-  --font-heading: "Geist", sans-serif;
-
-  --font-size-base: 16px;
-  --font-size-heading: 24px;
-  --font-size-small: 14px;
+  --font-main: 'Inter', sans-serif;
+  --font-heading: 'Montserrat', sans-serif;
 }
 
+/* === Стили для темной темы === */
 .dark {
   --forest: #5fa274;
   --sand: #d6a858;
@@ -36,20 +31,9 @@
 
 html {
   font-family: var(--font-main);
-  font-size: var(--font-size-base);
+  font-size: 16px; /* Оставляем базовый размер */
   background-color: var(--linen);
   color: var(--charcoal);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  letter-spacing: -0.02em;
 }
 
 body {
@@ -64,14 +48,23 @@ body {
   @apply bg-primary text-primary-foreground rounded-xl px-4 py-2 font-semibold hover:opacity-90 transition;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus {
+/* Вспомогательные стили для Autofill */
+input:-webkit-autofill, textarea:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px var(--linen) inset !important;
   box-shadow: 0 0 0px 1000px var(--linen) inset !important;
   -webkit-text-fill-color: var(--charcoal) !important;
-  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* Пример для кнопок */
+@keyframes hoverEffect {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.98);
+  }
+}
+
+.button-primary:hover {
+  animation: hoverEffect 0.2s ease-in-out forwards;
 }
