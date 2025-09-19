@@ -6,7 +6,7 @@ export default function Layout({ onLoginClick, onRegisterClick }) {
   return (
     <div className="min-h-screen flex flex-col">
       <Header onLoginClick={onLoginClick} onRegisterClick={onRegisterClick} />
-      <main className="flex-1">
+      <main className="flex-1 overflow-auto pt-[4rem]">
         <Outlet />
       </main>
     </div>
